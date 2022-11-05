@@ -5,13 +5,11 @@ import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.create
-import org.gradle.kotlin.dsl.get
+import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 
 fun Project.setupLibraryModule(
@@ -67,6 +65,8 @@ fun Project.setupAppModule(
 private inline fun <reified T : BaseExtension> Project.setupBaseModule(
     crossinline block: T.() -> Unit = {}
 ) = extensions.configure<T>("android") {
+    group = groupId
+    version = versionName
     compileSdkVersion(project.compileSdk)
     defaultConfig {
         minSdk = project.minSdk
@@ -108,3 +108,29 @@ private inline fun <reified T : BaseExtension> Project.setupBaseModule(
 private fun BaseExtension.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
     (this as ExtensionAware).extensions.configure("kotlinOptions", block)
 }
+
+//fun Project.spotless() {
+//    pluginManager.apply("com.diffplug.spotless")
+//    val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
+//
+//    extensions.configure<SpotlessExtension> {
+//        kotlin {
+//            target("**/*.kt")
+//            targetExclude("**/build/**/*.kt")
+//            ktlint(libs.findVersion("ktlint").get().toString()).userData(mapOf("android" to "true"))
+//            licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
+//        }
+//        format("kts") {
+//            target("**/*.kts")
+//            targetExclude("**/build/**/*.kts")
+//            // Look for the first line that doesn't have a block comment (assumed to be the license)
+//            licenseHeaderFile(rootProject.file("spotless/copyright.kts"), "(^(?![\\/ ]\\*).*$)")
+//        }
+//        format("xml") {
+//            target("**/*.xml")
+//            targetExclude("**/build/**/*.xml")
+//            // Look for the first XML tag that isn't a comment (<!--) or the xml declaration (<?xml)
+//            licenseHeaderFile(rootProject.file("spotless/copyright.xml"), "(<[^!?])")
+//        }
+//    }
+//}
