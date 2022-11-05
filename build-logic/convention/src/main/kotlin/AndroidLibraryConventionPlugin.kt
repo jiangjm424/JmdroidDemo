@@ -14,18 +14,8 @@
  *   limitations under the License.
  */
 
-import com.android.build.api.variant.AndroidComponentsExtension
-import com.android.build.api.variant.LibraryAndroidComponentsExtension
-import com.android.build.gradle.LibraryExtension
-import jm.droid.compile.configureFlavors
-import jm.droid.compile.configureKotlinAndroid
-import jm.droid.compile.configurePrintApksTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.VersionCatalogsExtension
-import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.getByType
 
 class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -35,22 +25,22 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.android")
             }
 
-            extensions.configure<LibraryExtension> {
-                configureKotlinAndroid(this)
-                defaultConfig.targetSdk = 33
-                configureFlavors(this)
-            }
-            extensions.configure<LibraryAndroidComponentsExtension> {
-                configurePrintApksTask(this)
-            }
-            val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
-            configurations.configureEach {
-                resolutionStrategy {
-                    force(libs.findLibrary("junit4").get())
-                    // Temporary workaround for https://issuetracker.google.com/174733673
-                    force("org.objenesis:objenesis:2.6")
-                }
-            }
+//            extensions.configure<LibraryExtension> {
+//                configureKotlinAndroid(this)
+//                defaultConfig.targetSdk = 33
+//                configureFlavors(this)
+//            }
+//            extensions.configure<LibraryAndroidComponentsExtension> {
+//                configurePrintApksTask(this)
+//            }
+//            val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
+//            configurations.configureEach {
+//                resolutionStrategy {
+//                    force(libs.findLibrary("junit4").get())
+//                    // Temporary workaround for https://issuetracker.google.com/174733673
+//                    force("org.objenesis:objenesis:2.6")
+//                }
+//            }
         }
     }
 }

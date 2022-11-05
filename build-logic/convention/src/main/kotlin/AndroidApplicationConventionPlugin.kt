@@ -14,14 +14,9 @@
  *   limitations under the License.
  */
 
-import com.android.build.api.variant.ApplicationAndroidComponentsExtension
-import com.android.build.api.dsl.ApplicationExtension
-import jm.droid.compile.configureFlavors
-import jm.droid.compile.configureKotlinAndroid
-import jm.droid.compile.configurePrintApksTask
+import jm.droid.compile.setupAppModule
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.configure
 
 class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -31,14 +26,14 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.android")
             }
 
-            extensions.configure<ApplicationExtension> {
-                configureKotlinAndroid(this)
-                defaultConfig.targetSdk = 33
-                configureFlavors(this)
-            }
-            extensions.configure<ApplicationAndroidComponentsExtension> {
-                configurePrintApksTask(this)
-            }
+//            extensions.configure<ApplicationExtension> {
+//                configureKotlinAndroid(this)
+//                defaultConfig.targetSdk = 33
+//                configureFlavors(this)
+//            }
+//            extensions.configure<ApplicationAndroidComponentsExtension> {
+//                configurePrintApksTask(this)
+//            }
         }
     }
 
