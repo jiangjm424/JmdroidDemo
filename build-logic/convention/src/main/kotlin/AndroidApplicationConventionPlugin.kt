@@ -15,6 +15,7 @@
  */
 
 import jm.droid.compile.setupAppModule
+import jm.droid.compile.spotless
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -26,6 +27,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.android")
             }
 
+            spotless()
 //            extensions.configure<ApplicationExtension> {
 //                configureKotlinAndroid(this)
 //                defaultConfig.targetSdk = 33

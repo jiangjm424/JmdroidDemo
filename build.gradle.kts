@@ -24,6 +24,7 @@ plugins {
     alias(libs.plugins.binaryCompatibility)
     alias(libs.plugins.dokka)
     alias(libs.plugins.ktlint)
+    alias(libs.plugins.spotless)
 }
 
 tasks.withType<DokkaMultiModuleTask>().configureEach {

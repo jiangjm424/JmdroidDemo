@@ -28,6 +28,8 @@ java {
 dependencies {
     compileOnly(libs.gradlePlugin.android)
     compileOnly(libs.gradlePlugin.kotlin)
+    compileOnly(libs.gradlePlugin.spotless)
+
 }
 
 gradlePlugin {
