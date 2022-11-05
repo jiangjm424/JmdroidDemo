@@ -1,0 +1,21 @@
+[versions]
+gson = "2.8.5"
+androidxAppCompat = "1.4.2"
+androidxCore = "1.8.0"
+material = "1.6.1"
+androidxConstraintlayout = "1.4.0"
+androidxNavigation = "2.3.5"
+
+
+[plugins]
+binaryCompatibility = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.10.1" }
+dokka = { id = "org.jetbrains.dokka", version = "1.6.10" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version = "10.3.0" }
+
+[libraries]
+#gradle plugin
+gradlePlugin-android = "com.android.tools.build:gradle:7.2.1"
+gradlePlugin-kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
+gradlePlugin-mavenPublish = "com.vanniktech:gradle-maven-publish-plugin:0.21.0"
+
+[bundles]
