@@ -47,6 +47,9 @@ setupAppModule {
 }
 
 dependencies {
+
+    implementation(project(":core:uibase"))
+    
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

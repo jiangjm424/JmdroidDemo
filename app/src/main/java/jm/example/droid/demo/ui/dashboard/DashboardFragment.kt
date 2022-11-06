@@ -17,42 +17,28 @@
 package jm.example.droid.demo.ui.dashboard
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import jm.droid.lib.uibase.AbsBindingFragment
 import jm.example.droid.demo.databinding.FragmentDashboardBinding
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : AbsBindingFragment<FragmentDashboardBinding>() {
 
-    private var _binding: FragmentDashboardBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
-
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textDashboard
+    private val dashboardViewModel by viewModels<DashboardViewModel>()
+    override fun setupData(binding: FragmentDashboardBinding, owner: LifecycleOwner) {
         dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+            binding.textDashboard.text = it
         }
-        return root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun setupView(binding: FragmentDashboardBinding, savedInstanceState: Bundle?) {
+        val root: View = binding.root
+    }
+
+    override fun onPageFirstComing() {
+
+        Log.i("jiang", "$this first coming")
     }
 }

@@ -17,42 +17,28 @@
 package jm.example.droid.demo.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import jm.droid.lib.uibase.AbsBindingFragment
 import jm.example.droid.demo.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment() {
+class HomeFragment : AbsBindingFragment<FragmentHomeBinding>() {
 
-    private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    private val dashboardViewModel by viewModels<HomeViewModel>()
+    override fun setupData(binding: FragmentHomeBinding, owner: LifecycleOwner) {
+        dashboardViewModel.text.observe(viewLifecycleOwner) {
+            binding.textHome.text = it
         }
-        return root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun setupView(binding: FragmentHomeBinding, savedInstanceState: Bundle?) {
+        val root: View = binding.root
+    }
+
+    override fun onPageFirstComing() {
+
+        Log.i("jiang", "$this first coming")
     }
 }

@@ -17,40 +17,17 @@
 package jm.example.droid.demo
 
 import android.os.Bundle
-import android.view.SurfaceView
-import android.view.View
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import jm.droid.lib.uibase.AbsBindingActivity
 import jm.example.droid.demo.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val r = View(this)
-        val g = FrameLayout(this)
-        val ll = LinearLayout(this)
-        val ga = RecyclerView(this)
-        val f = Button(this)
-        val tt = TextView(this)
-        val sf = SurfaceView(this)
-        val rr = RelativeLayout(this)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+class MainActivity : AbsBindingActivity<ActivityMainBinding>() {
+    override fun setupView(binding: ActivityMainBinding, savedInstanceState: Bundle?) {
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -63,5 +40,8 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun setupData(owner: LifecycleOwner) {
     }
 }
