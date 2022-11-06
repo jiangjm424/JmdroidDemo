@@ -17,12 +17,12 @@ abstract class BaseFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        log("onAttach")
+        log("onAttach:$this")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        log("onCreate")
+        log("onCreate:$this")
     }
 
     override fun onCreateView(
@@ -30,58 +30,58 @@ abstract class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        log("onCreateView")
+        log("onCreateView:$this")
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        log("onViewCreated")
+        log("onViewCreated:$this")
     }
 
     override fun onStart() {
         super.onStart()
-        log("onStart")
+        log("onStart:$this")
     }
 
     override fun onResume() {
         super.onResume()
-        log("onResume")
+        log("onResume:$this")
     }
 
     override fun onPause() {
         super.onPause()
-        log("onPause")
+        log("onPause:$this")
     }
 
     override fun onStop() {
         super.onStop()
-        log("onStop")
+        log("onStop:$this")
     }
 
     override fun onDetach() {
         super.onDetach()
-        log("onDetach")
+        log("onDetach:$this")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        log("onDestroyView")
+        log("onDestroyView:$this")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        log("onDestroy")
+        log("onDestroy:$this")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        log("onSaveInstanceState")
+        log("onSaveInstanceState:$this")
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        log("onConfigurationChanged")
+        log("onConfigurationChanged:$this")
     }
 
     private fun log(msg: String) {

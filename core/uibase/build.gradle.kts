@@ -10,6 +10,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.third.immersionbar)
 
     testImplementation(libs.test.junit)
     androidTestImplementation(libs.test.android.ext)

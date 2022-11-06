@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.gyf.immersionbar.ImmersionBar
 
 abstract class BaseActivity : AppCompatActivity() {
     companion object {
@@ -14,37 +15,38 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        log("onCreate")
+        log("onCreate:$this")
+        ImmersionBar.with(this).statusBarColor("#ff0000").init()
     }
 
     override fun onStart() {
         super.onStart()
-        log("onStart")
+        log("onStart:$this")
     }
 
     override fun onResume() {
         super.onResume()
-        log("onResume")
+        log("onResume:$this")
     }
 
     override fun onPause() {
         super.onPause()
-        log("onPause")
+        log("onPause:$this")
     }
 
     override fun onStop() {
         super.onStop()
-        log("onStop")
+        log("onStop:$this")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        log("onDestroy")
+        log("onDestroy:$this")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        log("onSaveInstanceState")
+        log("onSaveInstanceState:$this")
     }
 
     override fun onRestoreInstanceState(
@@ -52,12 +54,12 @@ abstract class BaseActivity : AppCompatActivity() {
         persistentState: PersistableBundle?
     ) {
         super.onRestoreInstanceState(savedInstanceState, persistentState)
-        log("onRestoreInstanceState")
+        log("onRestoreInstanceState:$this")
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        log("onConfigurationChanged")
+        log("onConfigurationChanged:$this")
     }
 
     private fun log(msg: String) {
