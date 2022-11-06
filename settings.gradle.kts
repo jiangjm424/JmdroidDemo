@@ -19,3 +19,4 @@ includeBuild("build-logic")
 rootProject.name = "JmdroidDemo"
 include(":app")
 include(":core:uibase")
+include(":core:samatadapter")
