@@ -17,6 +17,7 @@ import jm.droid.compile.setupAppModule
 
 plugins {
     id("jm.droid.application")
+    id("jm.droid.hilt")
 }
 setupAppModule {
     defaultConfig {

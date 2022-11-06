@@ -15,16 +15,18 @@ buildscript {
         classpath(libs.gradlePlugin.android)
         classpath(libs.gradlePlugin.kotlin)
         classpath(libs.gradlePlugin.mavenPublish)
+        classpath(libs.gradlePlugin.hilt)
     }
 }
 
 // https://youtrack.jetbrains.com/issue/KTIJ-19369
 @Suppress("DSL_SCOPE_VIOLATION", "UnstableApiUsage")
 plugins {
-    alias(libs.plugins.binaryCompatibility)
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.ktlint)
-    alias(libs.plugins.spotless)
+    alias(libs.plugins.binaryCompatibility) apply false
+    alias(libs.plugins.dokka) apply false
+    alias(libs.plugins.ktlint) apply false
+    alias(libs.plugins.spotless) apply false
+    alias(libs.plugins.hilt) apply false
 }
 
 tasks.withType<DokkaMultiModuleTask>().configureEach {

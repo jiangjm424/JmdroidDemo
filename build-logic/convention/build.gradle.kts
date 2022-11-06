@@ -29,7 +29,7 @@ dependencies {
     compileOnly(libs.gradlePlugin.android)
     compileOnly(libs.gradlePlugin.kotlin)
     compileOnly(libs.gradlePlugin.spotless)
-
+    compileOnly(libs.gradlePlugin.hilt)
 }
 
 gradlePlugin {
@@ -41,6 +41,10 @@ gradlePlugin {
         register("androidLibrary") {
             id = "jm.droid.library"
             implementationClass = "AndroidLibraryConventionPlugin"
+        }
+        register("androidHilt") {
+            id = "jm.droid.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
         }
     }
 }
