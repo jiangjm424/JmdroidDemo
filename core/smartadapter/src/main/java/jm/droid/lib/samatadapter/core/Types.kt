@@ -1,11 +1,6 @@
 
 package jm.droid.lib.samatadapter.core
 
-/**
- * An ordered collection to hold the types, delegates and linkers.
- *
- * @author Drakeet Xu
- */
 interface Types {
 
   /**

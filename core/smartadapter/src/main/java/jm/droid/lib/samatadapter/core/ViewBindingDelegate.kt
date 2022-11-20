@@ -7,11 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import jm.droid.lib.samatadapter.R
 
-/**
- * This is a simple [ItemViewDelegate] that does not require to declare and provide a [RecyclerView.ViewHolder].
- * @since v4.2.0
- * @author Drakeet Xu
- */
 abstract class ViewBindingDelegate<T, VB : ViewBinding> : ItemViewDelegate<T, ViewBindingDelegate.Holder<VB>>() {
 
   protected val View.holder: Holder<VB>
@@ -25,19 +20,14 @@ abstract class ViewBindingDelegate<T, VB : ViewBinding> : ItemViewDelegate<T, Vi
 
   protected val View.bindingAdapterPosition: Int get() = holder.bindingAdapterPosition
 
-  abstract fun onCreateView(context: Context): VB
+  abstract fun onCreateViewBinding(context: Context, parent: ViewGroup): VB
 
-  abstract fun onBindView(view: VB, item: T)
-
-  // Override this function if you need a parent ViewGroup
-  open fun onCreateView(context: Context, parent: ViewGroup): VB {
-    return onCreateView(context)
-  }
+  abstract fun onBindItem(view: VB, item: T)
 
   // Override this function if you need a ViewHolder or positions
-  open fun onBindView(holder: Holder<VB>, view: VB, item: T) {
-    view.root.setTag(R.id.tagViewHolder, holder)
-    onBindView(view, item)
+  open fun onBindItem(holder: Holder<VB>, view: VB, item: T) {
+    view.root.setTag(R.id.tag_view_holder, holder)
+    onBindItem(view, item)
   }
 
   protected fun getRecyclerLayoutParams(view: View): RecyclerView.LayoutParams {
@@ -46,14 +36,14 @@ abstract class ViewBindingDelegate<T, VB : ViewBinding> : ItemViewDelegate<T, Vi
 
   private fun holder(view: View): Holder<VB>? {
     @Suppress("UNCHECKED_CAST")
-    return view.getTag(R.id.tagViewHolder) as? Holder<VB>
+    return view.getTag(R.id.tag_view_holder) as? Holder<VB>
   }
 
   override fun onCreateViewHolder(context: Context, parent: ViewGroup): Holder<VB> {
-    return Holder(onCreateView(context, parent))
+    return Holder(onCreateViewBinding(context, parent))
   }
 
-  override fun onBindViewHolder(holder: Holder<VB>, item: T) = onBindView(holder, holder.binding, item)
+  override fun onBindViewHolder(holder: Holder<VB>, item: T) = onBindItem(holder, holder.binding, item)
 
   class Holder<V : ViewBinding>(val binding: V) : RecyclerView.ViewHolder(binding.root)
 }
