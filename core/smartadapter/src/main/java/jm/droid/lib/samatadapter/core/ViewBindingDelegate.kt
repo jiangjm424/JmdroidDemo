@@ -22,12 +22,12 @@ abstract class ViewBindingDelegate<T, VB : ViewBinding> : ItemViewDelegate<T, Vi
 
   abstract fun onCreateViewBinding(context: Context, parent: ViewGroup): VB
 
-  abstract fun onBindItem(view: VB, item: T)
+  abstract fun onBindItem(view: VB, pos: Int, item: T)
 
   // Override this function if you need a ViewHolder or positions
-  open fun onBindItem(holder: Holder<VB>, view: VB, item: T) {
+  open fun onBindItem(holder: Holder<VB>, view: VB, pos: Int, item: T) {
     view.root.setTag(R.id.tag_view_holder, holder)
-    onBindItem(view, item)
+    onBindItem(view, pos, item)
   }
 
   protected fun getRecyclerLayoutParams(view: View): RecyclerView.LayoutParams {
@@ -43,7 +43,7 @@ abstract class ViewBindingDelegate<T, VB : ViewBinding> : ItemViewDelegate<T, Vi
     return Holder(onCreateViewBinding(context, parent))
   }
 
-  override fun onBindViewHolder(holder: Holder<VB>, item: T) = onBindItem(holder, holder.binding, item)
+  override fun onBindViewHolder(holder: Holder<VB>, pos:Int, item: T) = onBindItem(holder, holder.binding, pos, item)
 
   class Holder<V : ViewBinding>(val binding: V) : RecyclerView.ViewHolder(binding.root)
 }

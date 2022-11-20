@@ -12,7 +12,10 @@ class SmartAdapterImpl internal constructor(private val types: MutableTypes) :
         return indexInTypesOf(position, items[position])
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, indexViewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        indexViewType: Int
+    ): RecyclerView.ViewHolder {
         return types.getType<Any>(indexViewType).delegate.onCreateViewHolder(parent.context, parent)
     }
 
@@ -20,9 +23,13 @@ class SmartAdapterImpl internal constructor(private val types: MutableTypes) :
         onBindViewHolder(holder, position, emptyList())
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, payloads: List<Any>) {
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+        payloads: List<Any>
+    ) {
         val item = items[position]
-        getOutDelegateByViewHolder(holder).onBindViewHolder(holder, item, payloads)
+        getOutDelegateByViewHolder(holder).onBindViewHolder(holder, position, item, payloads)
     }
 
     override fun getItemCount(): Int = items.size
@@ -32,6 +39,7 @@ class SmartAdapterImpl internal constructor(private val types: MutableTypes) :
         val itemViewType = getItemViewType(position)
         return types.getType<Any>(itemViewType).delegate.getItemId(item)
     }
+
     override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
         getOutDelegateByViewHolder(holder).onViewRecycled(holder)
     }
@@ -63,8 +71,28 @@ class SmartAdapterImpl internal constructor(private val types: MutableTypes) :
     }
 
     override fun add(data: List<Any>) {
+        val positionStart = items.size
         items.addAll(data)
+        notifyItemRangeInserted(positionStart, data.size)
     }
+
+    override fun remove(pos: Int): Any {
+        val item = items.removeAt(pos)
+        notifyItemRemoved(pos)
+        return item
+    }
+
+    override fun update(pos: Int, data: Any) {
+        items[pos] = data
+        notifyItemChanged(pos, data)
+    }
+
     override val adapter: RecyclerView.Adapter<*>
         get() = this
+
+    override fun setData(data: List<Any>) {
+        items.clear()
+        items.addAll(data)
+        notifyItemRangeChanged(0, data.size)
+    }
 }

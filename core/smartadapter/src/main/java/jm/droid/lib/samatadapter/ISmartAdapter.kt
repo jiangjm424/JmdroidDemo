@@ -14,7 +14,13 @@ interface ISmartAdapter {
 
     val adapter: RecyclerView.Adapter<*>
 
+    fun setData(data: List<Any>)
+
     fun add(data:List<Any>)
+
+    fun remove(pos:Int):Any
+
+    fun update(pos: Int, data:Any)
 
     class Builder {
         private val types = MutableTypes()

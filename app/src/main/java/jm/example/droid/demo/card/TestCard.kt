@@ -8,7 +8,7 @@ import jm.example.droid.demo.databinding.TextCardBinding
 
 class TestCard : ViewBindingDelegate<String, TextCardBinding>() {
 
-    override fun onBindItem(view: TextCardBinding, item: String) {
+    override fun onBindItem(view: TextCardBinding, pos:Int, item: String) {
         view.textView.text = "item:$item"
     }
 

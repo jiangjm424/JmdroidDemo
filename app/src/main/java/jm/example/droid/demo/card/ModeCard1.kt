@@ -9,7 +9,7 @@ import jm.example.droid.demo.databinding.ModeCard1Binding
 
 class ModeCard1 : ViewBindingDelegate<ModeTest1, ModeCard1Binding>() {
 
-    override fun onBindItem(view: ModeCard1Binding, item: ModeTest1) {
+    override fun onBindItem(view: ModeCard1Binding, pos:Int, item: ModeTest1) {
         view.textView.text = "mode:${item.d1}"
         view.textView2.text = "mode:${item.s1}"
     }

@@ -9,10 +9,10 @@ abstract class ItemViewDelegate<T, VH : ViewHolder> {
 
     abstract fun onCreateViewHolder(context: Context, parent: ViewGroup): VH
 
-    abstract fun onBindViewHolder(holder: VH, item: T)
+    abstract fun onBindViewHolder(holder: VH, pos:Int, item: T)
 
-    open fun onBindViewHolder(holder: VH, item: T, payloads: List<Any>) {
-        onBindViewHolder(holder, item)
+    open fun onBindViewHolder(holder: VH, pos: Int, item: T, payloads: List<Any>) {
+        onBindViewHolder(holder, pos, item)
     }
 
     @Suppress("UNUSED_PARAMETER")

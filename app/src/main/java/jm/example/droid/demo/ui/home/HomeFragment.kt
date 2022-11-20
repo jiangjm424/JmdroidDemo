@@ -48,7 +48,18 @@ class HomeFragment : AbsBindingFragment<FragmentHomeBinding>() {
     override fun setupView(binding: FragmentHomeBinding, savedInstanceState: Bundle?) {
         val root: View = binding.root
         binding.recyclerView.adapter = adapter.adapter
-        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(),3)
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+//        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(),3)
+        binding.add.setOnClickListener {
+            adapter.add(listOf("S:1","s2","s3","s4"))
+        }
+        binding.del.setOnClickListener {
+            val i = adapter.remove(1)
+            Log.i("jiang","rem item:$i")
+        }
+        binding.change.setOnClickListener {
+            adapter.update(2,"update:3")
+        }
     }
 
     override fun onPageFirstComing() {
