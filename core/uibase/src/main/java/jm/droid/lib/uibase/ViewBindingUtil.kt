@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package jm.droid.lib.uibase
 
 import android.view.LayoutInflater
@@ -18,30 +20,30 @@ object ViewBindingUtil {
             clazz.getMethod("inflate", LayoutInflater::class.java).invoke(null, layoutInflater) as VB
         }
 
-    @JvmStatic
-    fun <VB : ViewBinding> inflateWithGeneric(genericOwner: Any, parent: ViewGroup): VB =
-        inflateWithGeneric(genericOwner, LayoutInflater.from(parent.context), parent, false)
+//    @JvmStatic
+//    fun <VB : ViewBinding> inflateWithGeneric(genericOwner: Any, parent: ViewGroup): VB =
+//        inflateWithGeneric(genericOwner, LayoutInflater.from(parent.context), parent, false)
 
-    @JvmStatic
-    fun <VB : ViewBinding> inflateWithGeneric(
-        genericOwner: Any,
-        layoutInflater: LayoutInflater,
-        parent: ViewGroup?,
-        attachToParent: Boolean
-    ): VB = withGenericBindingClass<VB>(genericOwner) { clazz ->
-            clazz.getMethod(
-                "inflate",
-                LayoutInflater::class.java,
-                ViewGroup::class.java,
-                Boolean::class.java
-            ).invoke(null, layoutInflater, parent, attachToParent) as VB
-        }
+//    @JvmStatic
+//    fun <VB : ViewBinding> inflateWithGeneric(
+//        genericOwner: Any,
+//        layoutInflater: LayoutInflater,
+//        parent: ViewGroup?,
+//        attachToParent: Boolean
+//    ): VB = withGenericBindingClass<VB>(genericOwner) { clazz ->
+//            clazz.getMethod(
+//                "inflate",
+//                LayoutInflater::class.java,
+//                ViewGroup::class.java,
+//                Boolean::class.java
+//            ).invoke(null, layoutInflater, parent, attachToParent) as VB
+//        }
 
-    @JvmStatic
-    fun <VB : ViewBinding> bindWithGeneric(genericOwner: Any, view: View): VB =
-        withGenericBindingClass<VB>(genericOwner) { clazz ->
-            clazz.getMethod("bind", View::class.java).invoke(null, view) as VB
-        }
+//    @JvmStatic
+//    fun <VB : ViewBinding> bindWithGeneric(genericOwner: Any, view: View): VB =
+//        withGenericBindingClass<VB>(genericOwner) { clazz ->
+//            clazz.getMethod("bind", View::class.java).invoke(null, view) as VB
+//        }
 
     private fun <VB : ViewBinding> withGenericBindingClass(
         genericOwner: Any,

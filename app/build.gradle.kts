@@ -50,7 +50,8 @@ setupAppModule {
 dependencies {
 
     implementation(project(":core:uibase"))
-    
+    implementation(project(":core:samatadapter"))
+
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
